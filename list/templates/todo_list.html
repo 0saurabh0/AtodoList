@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-do list </title>
+</head>
+<body style="text-align: center;background-color: rgb(121, 139, 83);">
+    <h1>Todo List</h1>
+
+    <form method="POST" action="{% url 'index' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+    <ul>
+        {% for todo in todos %}
+    <li>{{ todo.title }}</li>
+
+    <form method="POST" action="{% url 'todo_delete' todo.id %}">
+            {% csrf_token %}
+            <button type="submit">delete</button>
+        </form>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
